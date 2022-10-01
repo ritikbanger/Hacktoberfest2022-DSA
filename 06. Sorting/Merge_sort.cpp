@@ -1,90 +1,66 @@
-#include <iostream>
+#include<iostream>
+#include<cstdio>
+#include<cmath>
 using namespace std;
-
-// Merges two subarrays of array[].
-// First subarray is arr[begin..mid]
-// Second subarray is arr[mid+1..end]
-void merge(int array[], int const left, int const mid, int const right)
-{
-	auto const subArrayOne = mid - left + 1;
-	auto const subArrayTwo = right - mid;
-
-	// Create temp arrays
-	auto *leftArray = new int[subArrayOne],
-		*rightArray = new int[subArrayTwo];
-
-	// Copy data to temp arrays leftArray[] and rightArray[]
-	for (auto i = 0; i < subArrayOne; i++)
-		leftArray[i] = array[left + i];
-	for (auto j = 0; j < subArrayTwo; j++)
-		rightArray[j] = array[mid + 1 + j];
-
-	auto indexOfSubArrayOne = 0, // Initial index of first sub-array
-		indexOfSubArrayTwo = 0; // Initial index of second sub-array
-	int indexOfMergedArray = left; // Initial index of merged array
-
-	// Merge the temp arrays back into array[left..right]
-	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
-		if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo]) {
-			array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-			indexOfSubArrayOne++;
-		}
-		else {
-			array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-			indexOfSubArrayTwo++;
-		}
-		indexOfMergedArray++;
-	}
-	// Copy the remaining elements of
-	// left[], if there are any
-	while (indexOfSubArrayOne < subArrayOne) {
-		array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-		indexOfSubArrayOne++;
-		indexOfMergedArray++;
-	}
-	// Copy the remaining elements of
-	// right[], if there are any
-	while (indexOfSubArrayTwo < subArrayTwo) {
-		array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-		indexOfSubArrayTwo++;
-		indexOfMergedArray++;
-	}
+void print_array(int array[],int left,int right){
+    int i;
+    for (i=left; i <= right; i++)
+        cout<<array[i]<<'\t';
+    cout<<endl;
 }
 
-// begin is for left index and end is
-// right index of the sub-array
-// of arr to be sorted */
-void mergeSort(int array[], int const begin, int const end)
-{
-	if (begin >= end)
-		return; // Returns recursively
+void merge(int array[], int left, int mid, int right){
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 =  right - mid;
 
-	auto mid = begin + (end - begin) / 2;
-	mergeSort(array, begin, mid);
-	mergeSort(array, mid + 1, end);
-	merge(array, begin, mid, end);
+    int Left[n1], Right[n2];
+
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        Left[i] = array[left + i];
+    for (j = 0; j < n2; j++)
+        Right[j] = array[mid + 1+ j];
+
+    i = 0; // Initial index of first subarray
+    j = 0; // Initial index of second subarray
+    k = left; // Initial index of merged subarray
+    while (i < n1 && j < n2){
+        if (Left[i] <= Right[j])
+            array[k++] = Left[i++];
+        else
+            array[k++] = Right[j++];
+    }
+
+    /* Copy the remaining elements of L[], if there are any */
+    while (i < n1)
+        array[k++] = Left[i++];
+
+    /* Copy the remaining elements of R[], if there are any */
+    while (j < n2)
+        array[k++] = Right[j++];
 }
 
-// UTILITY FUNCTIONS
-// Function to print an array
-void printArray(int A[], int size)
-{
-	for (auto i = 0; i < size; i++)
-		cout << A[i] << " ";
+void mergeSort(int array[], int left, int right){
+    int i;
+    if (left < right){
+        int mid = left + (right - left) / 2;
+        mergeSort(array, left, mid);
+        mergeSort(array, mid+1, right);
+        merge(array, left, mid, right);
+    }
 }
 
-// Driver code
-int main()
-{
-	int arr[] = { 12, 11, 13, 5, 6, 7 };
-	auto arr_size = sizeof(arr) / sizeof(arr[0]);
 
-	cout << "Given array is \n";
-	printArray(arr, arr_size);
+int main(){
+    int array[] = {24, 17, 13, 22, 19, 21, 16, 12};
+    int array_size = sizeof(array)/sizeof(array[0]);
+    int i;
 
-	mergeSort(arr, 0, arr_size - 1);
-
-	cout << "\nSorted array is \n";
-	printArray(arr, arr_size);
-	return 0;
+    cout<<"Given array is :\n";
+    print_array(array,0,array_size-1);
+    mergeSort(array, 0, array_size - 1);
+    cout<<"\nSorted array is :\n";
+    print_array(array,0,array_size-1);
+    return 0;
 }
