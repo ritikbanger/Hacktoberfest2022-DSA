@@ -1,3 +1,5 @@
+//problem link: https://codeforces.com/contest/1738/problem/A
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,6 +44,7 @@ void solve()
     if (len(bb))
         ans2 = bb.back();
     int i = 0;
+    //either 0 comes first or 1 , we take first element as min and rest in decreasing order.
     for (i = 0; i < min(len(bb), len(aa)); i++)
         ans1 += 2 * bb[i];
     for (; i < len(bb); i++)
