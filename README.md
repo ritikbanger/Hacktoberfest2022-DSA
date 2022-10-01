@@ -8,9 +8,7 @@
     </a>
 </h3>
 
-<div>
 ![Snake animation](https://github.com/ritikbanger/ritikbanger/blob/snake/snake.svg)
-</div>
 
 ## Event details :
 
