@@ -1,4 +1,4 @@
-![image](https://github.com/ritikbanger/Hacktoberfest2022-DSA/blob/main/hacktoberfest)
+![image](https://github.com/ritikbanger/Hacktoberfest2022-DSA/blob/main/hacktoberfest.png)
 
 <h1 align="center"> Hacktoberfest 2022 </h1>
 
