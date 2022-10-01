@@ -8,6 +8,10 @@
     </a>
 </h3>
 
+<div>
+![Snake animation](https://github.com/ritikbanger/ritikbanger/blob/snake/snake.svg)
+</div>
+
 ## Event details :
 
 - Hacktoberfest is a **month-long** challenge. It happens every year in the month of October.
@@ -144,9 +148,7 @@ For your PR to count it must be:
   <img align="left" alt="Ritik's Twitter" width="3%"  style="margin:10px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />
 </a>&ensp;&ensp;&ensp;
 </p>
-<div>
-![Snake animation](https://github.com/ritikbanger/ritikbanger/blob/snake/snake.svg)
-</div>
+
 <br>
 
 ---
