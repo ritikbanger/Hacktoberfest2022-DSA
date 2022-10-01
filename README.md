@@ -3,8 +3,8 @@
 <h1 align="center"> Hacktoberfest 2022 </h1>
 
 <h3 align="center">
-    <a href="https://hacktoberfest.digitalocean.com/">
-        Link To HacktoberFest 2021
+    <a href="https://hacktoberfest.com/">
+        Link To HacktoberFest 2022
     </a>
 </h3>
 
@@ -59,7 +59,7 @@ For your PR to count it must be:
 
 - Submitted in a public repo, AND the PR is labelled as `hacktoberfest-accepted` by a maintainer. or
 - Submitted in a repo labelled `hacktoberfest` , AND Merged, OR Approved
-- You can opt not to receive a t-shirt and stickers and you can choose to have a tree planted in your name and help make Hacktoberfest 2021 more carbon neutral.
+- You can opt not to receive a t-shirt and stickers and you can choose to have a tree planted in your name and help make Hacktoberfest 2022 more carbon neutral.
 
 ---
 

@@ -22,6 +22,6 @@ def doomsDay(year):
      
     return weekDays[doomsday]
  
-year = 2021
+year = 2022
 print("Doomsday in the year % s = % s"%(year, doomsDay(year)))
 

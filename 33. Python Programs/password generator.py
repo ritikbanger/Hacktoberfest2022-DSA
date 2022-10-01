@@ -1,4 +1,4 @@
-## UPDATE 2021 : Thought of changing this with better variables and optimizations 
+## UPDATE 2022 : Thought of changing this with better variables and optimizations 
 ## but left it as it is , as a memoir for old *Me Coder*
 
 # import all the necesary libraries
