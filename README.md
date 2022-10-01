@@ -34,7 +34,7 @@ Register for Hacktoberfest: Navigate to the [Hacktoberfest registration page](ht
 
 ### Step - 3:
 
-Find good projects worth contributing on the GitHub page. You can type `label:hactoberfest is:issue is:open`
+Find good projects worth contributing on the GitHub page. You can type `label:hacktoberfest is:issue is:open`
 
 You can add a language label of your choice to filter open issues. If you are a beginner and can’t find good issues then there’s tag `label:good first issue` which filters out issues for beginners who want to contribute.
 
