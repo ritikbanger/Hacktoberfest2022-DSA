@@ -81,11 +81,7 @@ string infixtopostfix(string s){
 
 
             }
-            // while(!st.empty()&&(precedence(st.top())>precedence(s[i]))){
-            //     res+=st.top();
-            //     st.pop();
-            // }
-            // st.push(s[i]);
+           
 
 
 
