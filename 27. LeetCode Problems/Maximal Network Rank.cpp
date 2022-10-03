@@ -24,7 +24,7 @@ Decrement 1 from the computed sum if the cities under consideration are connecte
 Update the maximal network rank if the network rank computed is greater than the current value.
 
 
-Note:
+
 Note:
 Used unordered_set in the graph to track neighbors (connected cities) in order to speed up the look up.
 (Required to check if the 2 cities under consideration are connected or not)
