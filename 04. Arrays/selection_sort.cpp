@@ -1,36 +1,44 @@
-#include <iostream>
+//dynamic program to sort the array using selection_sort
+
+#include <bits/stdc++.h>
 using namespace std;
-
-void swap(int *a, int *b) {
-  int temp = *a;
-  *a = *b;
-  *b = temp;
+ 
+//Swap function
+void swap(int *xp, int *yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
 }
-void printArray(int array[], int size) {
-  for (int i = 0; i < size; i++) {
-    cout << array[i] << " ";
-  }
-  cout << endl;
-}
-
-void selectionSort(int array[], int size) {
-  for (int step = 0; step < size - 1; step++) {
-    int min_idx = step;
-    for (int i = step + 1; i < size; i++) {
-
-      if (array[i] < array[min_idx])
-        min_idx = i;
+ 
+void selectionSort(int arr[], int n)
+{
+    int i, j, min;
+ 
+    // One by one move boundary of unsorted subarray
+    for (i = 0; i < n-1; i++)
+    {
+       
+        // Find the minimum element in unsorted array
+        min = i;
+        for (j = i+1; j < n; j++)
+        if (arr[j] < arr[min])
+            min = j;
+ 
+        // Swap the found minimum element with the first element
+        if(min!=i)
+            swap(&arr[min], &arr[i]);
     }
+}
+ 
+//Function to print an array
 
-    swap(&array[min_idx], &array[step]);
-  }
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        cout << arr[i] << " ";
+    cout << endl;
 }
 
-int main() {
-  int array1[] = {20, 12, 10, 15, 2};
-  int size = sizeof(array1) / sizeof(array1[0]);
-  selectionSort(array1, size);
-  cout << "Sorted array in Acsending Order:\n";
-  printArray(array1, size);
-  return 0;
-}
+//In this program you can give input by yourselft it is not static. It is the dynamic implementation of sorting.
