@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int low = 0;
+        int mid = 0;
+        int high = nums.size()-1;
+        while (mid <= high){
+        // if we have 0, then we'll swap them and increase the value of low, so that next 0 could be accommodated there
+        if (nums[mid] == 0)
+            swap(nums[low++], nums[mid++]);
+        // if we get 1, then there's no need of swapping
+        else if (nums[mid] == 1)
+            mid++;
+        // getting 2 will need swapping of high and mid, we will decrement high afterthat
+        else if (nums[mid] == 2)
+            swap(nums[mid], nums[high--]);
+    }
+    }
+};
