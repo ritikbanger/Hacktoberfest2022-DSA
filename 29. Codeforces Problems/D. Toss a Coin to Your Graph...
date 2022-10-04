@@ -1,0 +1,138 @@
+/* https://codeforces.com/contest/1679/problem/D 
+ problem tag- binary search dfs and similar dp graphs *1900
+
+*/
+
+
+
+
+#include<bits/stdc++.h>
+#define  ull unsigned long long int
+#define ll long long 
+#define mod 1000000007
+#define all(x) x.begin(),x.end()
+#define lb lower_bound
+#define ub upper_bound
+#define ff first
+#define ss second
+#define pb push_back
+#define Setbit(n)   __builtin_popcountll(n)
+#define ms(a,x) memset(a,x,sizeof(a))
+#define sp(n,a) cout<<fixed<<setprecision(n)<<a
+#define maxa(a,n) *max_element(a,a+n)
+#define mina(a,n) *min_element(a,a+n)
+#define aca(a,n,x) accumulate(a,a+n,x)
+#define pi 3.14159265358979323846
+const ll INF=1e15;
+const  ll  N=200007;
+using namespace std;
+int64_t lol;
+#define MOD 1e9+7
+
+ll n,m,k,i,j;
+
+vector<ll> wt(200005+10);
+vector<pair<ll,ll>> edges;
+ 
+bool check(ll mid){
+    vector<ll> adj[n+1];
+    vector<ll> inordr(n+1,0);
+    for(auto I: edges){
+        if(wt[I.ff]<=mid && wt[I.ss]<=mid){
+            adj[I.ff].pb(I.ss);
+            inordr[I.ss]++;
+        }
+    }
+
+    vector<ll> topo;
+    queue<ll> q;
+    for(i=1;i<=n;i++){
+        if(inordr[i]==0){
+            q.push(i);
+
+        }
+    }
+    while(q.size()){
+        ll node=q.front();
+        q.pop();
+        topo.pb(node);
+        for(auto I :adj[node]){
+            inordr[I]--;
+            if(inordr[I]==0){
+                q.push(I);
+            }
+        }
+    }
+
+    if(topo.size()!=n){
+        return 1;
+    }
+    vector<ll> dp(n+1,0);
+    ll ans=0;
+    for(i=n-1;i>=0;i--){
+        ll u=topo[i];
+        for(auto v: adj[u]){
+            dp[u]=max(dp[u],dp[v]+1);
+        }
+        ans=max(ans,dp[u]);
+    }
+    if(ans>=k-1)return 1;
+    return 0;
+
+
+}
+void solve(){
+ 
+
+cin>>n>>m>>k;
+ll mn=1e10;
+for(i=1;i<=n;i++){
+    cin>>wt[i];
+    mn=min(mn,wt[i]);
+}
+for(i=0;i<m;i++){
+    ll x,y;
+    cin>>x>>y;
+    edges.pb({x,y});
+}
+if(k==1){
+    cout<<mn<<"\n";
+    return;
+}
+ll lo=0,hi=1e10,ans=-1;
+
+while(lo<=hi){
+    ll mid=(lo+hi)/2;
+
+    if(check(mid)){
+        ans=mid;
+        hi=mid-1;
+    }
+    else {
+        lo=mid+1;
+    }
+ 
+}
+
+cout<<ans<<"\n";
+
+
+}
+int  main(){
+ 
+ios_base::sync_with_stdio(false);
+    cin.tie(NULL);cout.tie(NULL);
+ 
+ll  t;
+ 
+t=1;
+// cin>>t;
+ 
+ 
+while(t--){
+ 
+solve();
+ 
+}
+return 0;
+}
