@@ -51,13 +51,7 @@
       pop();
       pop();
 
-       cout<<"The current minimum is : "<<getMin()<<endl;
-
-
-
-
-
- }
+       cout<<"The current minimum is : "<<getMin()<<endl;}
 
 
 
