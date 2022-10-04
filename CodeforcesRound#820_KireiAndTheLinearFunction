@@ -1,0 +1,168 @@
+Problem.
+
+Given the string s of decimal digits (0-9) of length n.
+
+A substring is a sequence of consecutive characters of a string. The substring of this string is defined by a pair of indexes — with its left and right ends. So, each pair of indexes (l,r), where 1≤l≤r≤n, corresponds to a substring of the string s. We will define as v(l,r) the numeric value of the corresponding substring (leading zeros are allowed in it).
+
+For example, if n=7, s="1003004", then v(1,3)=100, v(2,3)=0 and v(2,7)=3004.
+
+You are given n, s and an integer w (1≤w<n).
+
+You need to process m queries, each of which is characterized by 3 numbers li,ri,ki (1≤li≤ri≤n;0≤ki≤8).
+
+The answer to the ith query is such a pair of substrings of length w that if we denote them as (L1,L1+w−1) and (L2,L2+w−1), then:
+
+L1≠L2, that is, the substrings are different;
+the remainder of dividing a number v(L1,L1+w−1)⋅v(li,ri)+v(L2,L2+w−1) by 9 is equal to ki.
+If there are many matching substring pairs, then find a pair where L1 is as small as possible. If there are many matching pairs in this case, then minimize L2.
+
+Note that the answer may not exist.
+
+Solution in JAVA.
+
+
+```
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+ 
+public class SolutionF {
+ 
+    public static void main(String[] args) throws Exception {
+        out = new PrintWriter(new BufferedOutputStream(System.out));
+        sc = new FastReader();
+ 
+        int test = sc.nextInt();
+        for (int t = 1; t <= test; t++) {
+            solve(t);
+        }
+        out.close();
+    }
+ 
+    private static void solve(int t) {
+        char[] arr = sc.next().toCharArray();
+        int n = arr.length;
+        int substringLength = sc.nextInt();
+        int queries = sc.nextInt();
+ 
+        int[] prefixSum = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefixSum[i + 1] = prefixSum[i] + (arr[i] - '0');
+        }
+ 
+        Map<Integer, List<Integer>> remainderIndices = new HashMap<>();
+        for (int i = 0; i < 9; i++) {
+            remainderIndices.put(i, new ArrayList<>());
+        }
+ 
+        for (int i = 0; i + substringLength - 1 < n; i++) {
+            int remainder = (prefixSum[i + substringLength] - prefixSum[i]) % 9;
+            remainderIndices.get(remainder).add(i);
+        }
+ 
+        for (int i = 0; i < queries; i++) {
+            int l = sc.nextInt();
+            int r = sc.nextInt();
+            int remainderRequired = sc.nextInt();
+ 
+            // (v1 * v3 + v2) % 9 == k
+            int v3 = (prefixSum[r] - prefixSum[l - 1]) % 9;
+ 
+            int[] startIndices = new int[2];
+            Arrays.fill(startIndices, n);
+ 
+            for (int v1 = 0; v1 < 9; v1++) {
+                for (int v2 = 0; v2 < 9; v2++) {
+                    if (remainderIndices.get(v1).size() > 0 && remainderIndices.get(v2).size() > 0 && (v1 * v3 + v2) % 9 == remainderRequired) {
+                        int x = n, y = n;
+                        if (v1 == v2) {
+                            if (remainderIndices.get(v1).size() > 1) {
+                                x = remainderIndices.get(v1).get(0);
+                                y = remainderIndices.get(v1).get(1);
+                            }
+                        }else {
+                            x = remainderIndices.get(v1).get(0);
+                            y = remainderIndices.get(v2).get(0);
+                        }
+ 
+                        if (x < startIndices[0]) {
+                            startIndices[0] = x;
+                            startIndices[1] = y;
+                        }else if (x == startIndices[0] && y < startIndices[1]) {
+                            startIndices[1] = y;
+                        }
+                    }
+                }
+            }
+ 
+            if (startIndices[0] == n) {
+                out.println(-1 + " " + -1);
+            }else {
+                out.println((startIndices[0] + 1) + " " + (startIndices[1] + 1));
+            }
+        }
+    }
+ 
+ 
+    public static FastReader sc;
+    public static PrintWriter out;
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer str;
+ 
+        public FastReader()
+        {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+ 
+        String next()
+        {
+            while (str == null || !str.hasMoreElements())
+            {
+                try
+ 
+                {
+                    str = new StringTokenizer(br.readLine());
+                }
+                catch (IOException  lastMonthOfVacation)
+                {
+                    lastMonthOfVacation.printStackTrace();
+                }
+ 
+            }
+            return str.nextToken();
+        }
+ 
+        int nextInt()
+        {
+            return Integer.parseInt(next());
+        }
+ 
+        long nextLong()
+        {
+            return Long.parseLong(next());
+        }
+ 
+        double nextDouble()
+        {
+            return Double.parseDouble(next());
+        }
+ 
+        String nextLine()
+        {
+            String str = "";
+            try
+            {
+                str = br.readLine();
+            }
+            catch (IOException lastMonthOfVacation)
+            {
+                lastMonthOfVacation.printStackTrace();
+            }
+            return str;
+        }
+    }
+}
+```
