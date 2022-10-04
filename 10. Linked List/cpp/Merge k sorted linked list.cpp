@@ -13,6 +13,11 @@ public:
     
     ListNode *merge(ListNode*l1 , ListNode *l2)
     {
+        if(l1==NULL)
+            return l2;
+        else if (l2==NULL)
+            return l1;
+        
         ListNode *dm = new ListNode(-1);
         ListNode *curr=dm;
         
@@ -45,8 +50,8 @@ public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size()== 0)
             return NULL;
-        ListNode *head = lists[0];
-        for(int i=1;i< lists.size();i++)
+        ListNode *head = NULL;
+        for(int i=0;i< lists.size();i++)
         {
             head = merge(head , lists[i]);
         }
