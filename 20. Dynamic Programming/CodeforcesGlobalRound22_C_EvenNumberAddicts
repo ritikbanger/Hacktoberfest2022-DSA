@@ -1,0 +1,155 @@
+Problem : 
+
+Alice and Bob are playing a game on a sequence a1,a2,…,an of length n. They move in turns and Alice moves first.
+
+In the turn of each player, he or she should select an integer and remove it from the sequence. The game ends when there is no integer left in the sequence.
+
+Alice wins if the sum of her selected integers is even; otherwise, Bob wins.
+
+Your task is to determine who will win the game, if both players play optimally.
+
+
+
+Solution in Java.
+Using dp + memo.
+
+```
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class SolutionC {
+
+    static int MAX = 105;
+    static int[][][][] dp = new int[MAX][MAX][2][2];
+
+    public static void main(String[] args) throws Exception {
+        out = new PrintWriter(new BufferedOutputStream(System.out));
+        sc = new FastReader();
+
+        int test = sc.nextInt();
+        for (int t = 1; t <= test; t++) {
+            solve(t);
+        }
+        out.close();
+    }
+
+    private static void solve(int t) {
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        int odds = 0, evens = 0;
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+            if (arr[i] % 2 == 0) {
+                evens++;
+            }else {
+                odds++;
+            }
+        }
+        for (int i = 0; i <= odds; i++) {
+            for (int j = 0; j <= evens; j++) {
+                for (int k = 0; k < 2; k++) {
+                    for (int l = 0; l < 2; l++) {
+                        dp[i][j][k][l] = -1;
+                    }
+                }
+            }
+        }
+        out.println(evenNumberAddicts(evens, odds, 0, 0, 0) == 1 ? "Alice" : "Bob");
+    }
+
+    private static int evenNumberAddicts(int evens, int odds, int turn, int aliceSumParity, int bobSumParity) {
+        if (evens == 0) {
+            if (odds == 1) {
+                if (turn == 0) {
+                    return aliceSumParity;
+                }
+                return bobSumParity;
+            }
+            return evenNumberAddicts(evens, odds - 1, 1 - turn, turn == 0 ? 1 - aliceSumParity : aliceSumParity, turn == 1 ? 1 - bobSumParity : bobSumParity);
+        }
+        if (odds == 0) {
+            if (evens == 1) {
+                if (turn == 0) {
+                    return 1 - aliceSumParity;
+                }
+                return 1 - bobSumParity;
+            }
+            return evenNumberAddicts(evens - 1, odds, 1 - turn, aliceSumParity, bobSumParity);
+        }
+        if (dp[odds][evens][aliceSumParity][bobSumParity] != -1) {
+            return dp[odds][evens][aliceSumParity][bobSumParity];
+        }
+        int takeEven = evenNumberAddicts(evens - 1, odds, 1 - turn, aliceSumParity, bobSumParity);
+        int takeOdd = evenNumberAddicts(evens, odds - 1, 1 - turn, turn == 0 ? 1 - aliceSumParity : aliceSumParity, turn == 1 ? 1 - bobSumParity : bobSumParity);
+        if (turn == 0) {
+            dp[odds][evens][aliceSumParity][bobSumParity] = Math.max(takeEven, takeOdd);
+        }else {
+            dp[odds][evens][aliceSumParity][bobSumParity] = Math.min(takeEven, takeOdd);
+        }
+        return dp[odds][evens][aliceSumParity][bobSumParity];
+    }
+
+
+    public static FastReader sc;
+    public static PrintWriter out;
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer str;
+
+        public FastReader()
+        {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+
+        String next()
+        {
+            while (str == null || !str.hasMoreElements())
+            {
+                try
+
+                {
+                    str = new StringTokenizer(br.readLine());
+                }
+                catch (IOException  lastMonthOfVacation)
+                {
+                    lastMonthOfVacation.printStackTrace();
+                }
+
+            }
+            return str.nextToken();
+        }
+
+        int nextInt()
+        {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong()
+        {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble()
+        {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine()
+        {
+            String str = "";
+            try
+            {
+                str = br.readLine();
+            }
+            catch (IOException lastMonthOfVacation)
+            {
+                lastMonthOfVacation.printStackTrace();
+            }
+            return str;
+        }
+    }
+}
+```
