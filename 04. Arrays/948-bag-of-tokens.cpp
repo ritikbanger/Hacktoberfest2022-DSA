@@ -1,4 +1,4 @@
-***
+/***
 948. Bag of Tokens
 You have an initial power of power, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed).
 Your goal is to maximize your total score by potentially playing each token in one of two ways:
@@ -31,11 +31,22 @@ Explanation: Play the tokens in this order to get a score of 2:
 Constraints:
 
 0 <= tokens.length <= 1000
-0 <= tokens[i], power < 104 ***
-''' code'''
-class Solution {
-public:
-    int bagOfTokensScore(vector<int>& tokens, int power) {
+0 <= tokens[i], power < 104 
+''' code''' ***/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+int t,power;
+cin>>t;
+int vector<int>& tokens ;
+while(t--)
+{
+        for(int i=0;i<tokens.end();i++)
+        {
+        cin>>tokens[i];
+        }
+        cin>>power;
         sort(tokens.begin(),tokens.end());
         int n=tokens.size();
         int l=0;
@@ -58,6 +69,6 @@ public:
                 break;
 }
 }
-        return l-(n-r);
+        cout<< l-(n-r);
     }
-};
+}
