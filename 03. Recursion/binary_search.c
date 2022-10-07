@@ -14,9 +14,18 @@ int binarySearch(int array[], int x, int low, int high) {
  return -1;
 }
 int main(void) {
- int array[] = {3, 4, 5, 6, 7, 8, 9};
- int n = sizeof(array) / sizeof(array[0]);
- int x = 4;
+ int array[30];
+ int n;
+ printf("The size of array: ");
+ scanf("%d",&n);
+ for(int i=0; i<n; i++)
+ {
+     printf("Enter the element %d :",i+1);
+     scanf("%d",&array[i]);
+ }
+ int x;
+ printf("Enter the number to be found: ");
+ scanf("%d",&x);
  int result = binarySearch(array, x, 0, n - 1);
  if (result == -1)
  printf("Not found");
