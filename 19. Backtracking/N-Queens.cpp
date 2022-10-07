@@ -68,6 +68,11 @@ int main()
 {
     int n;
     cin >> n;
+    if (n <= 3)
+    {
+        cout << "No solution exists" << endl;
+        exit(0);
+    }
     Solution ob;
     vector<vector<string>> ans = ob.solveNQueens(n);
     for (int i = 0; i < n; i++)
