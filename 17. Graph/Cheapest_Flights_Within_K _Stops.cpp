@@ -1,3 +1,12 @@
+// Problem Statement 
+// Suppose we have n cities connected by m flights. 
+// Each flight starts from u and arrives at v with a price w. 
+// If we have all the cities and flights, together with starting city src and the destination dst, here our task is to find the cheapest price from src to dst with up to k stops. 
+// If there is no such route, then return -1.
+// Eg 
+// So, if the input is like n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 1, then the output will be 200
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,10 +52,10 @@ public:
 };
 
 int main(){
-    Solution obj1;
+        Solution obj1;
 
-    vector<vector<int>>flights = [[0,1,100],[1,2,100],[0,2,500]];
+    vector<vector<int>>flights = {{0,1,100},{1,2,100},{0,2,500}};
    int  n = 3, src = 0, dst = 2, k = 1;
 
-   cout<<"The Minimum Cost To reach Destination With K Stops"<<obj1.findCheapestPrice(n,flights,src,dst,k);
+   cout<<"The Minimum Cost To reach Destination With K Stops"<<" "<< obj1.findCheapestPrice(n,flights,src,dst,k);
 }
