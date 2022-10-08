@@ -1,3 +1,4 @@
+#https://codeforces.com/contest/831/problem/A
 n = int(input())
 l = list( map(int,input().split()))
 j = 0
