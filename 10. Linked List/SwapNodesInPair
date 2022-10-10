@@ -1,0 +1,15 @@
+ListNode* swapPairs(ListNode* head) {
+        
+        ListNode* temp ;
+        
+        if(head ==NULL || head->next ==NULL)
+            return head;
+        
+        temp = head->next;
+        head->next = swapPairs(head->next->next);
+        
+        temp->next = head;
+        
+        return temp;
+        
+    }
