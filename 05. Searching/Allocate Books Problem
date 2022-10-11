@@ -1,0 +1,131 @@
+PROBLEM :
+An array containing n number of books is given . Each location in the array denotes the number of pages the books have.Such that ith book have arr[i] 
+pages. Now the divide the books to k students such that "the MAXIMUM number of pages , allocated to a student is MINIMUM ".
+
+CONDITION
+1. Each book will be allocated to exactly one student. 
+2. Each student has to be allocated at least one book.
+3. Allotment should be in  contiguous order.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXAMPLE TESTCASES:
+
+TESTCASE 1:
+INPUT: n=4
+       arr[]={12,34,67,90} 
+       k=2
+
+OUTPUT: 113
+
+Explanation: 
+                                                  *POSSIBLE COMBINATION*
+total pages to student1        books_alloted_to_student1     |    books_allocated_to_student2         total pages to student2
+       12                            12                      |        34,67,90                                   191
+       46                            12,34                   |        67,90                                      157
+       113                           12,34,67                |        90                                         90
+       
+maximum of (12,191) is 191
+maximum of (46,157) is 157
+maximum of (113,90) is 113
+
+so the final answer will be : minimum of (191,157,113) =====> 113
+
+
+TESTCASE 2:
+INPUT : n = 3
+        arr[] = {15,17,20}
+        k = 2
+OUTPUT: 32
+Explanation: 
+                                                  *POSSIBLE COMBINATION*
+total pages to student1        books_alloted_to_student1     |    books_allocated_to_student2         total pages to student2
+       15                                 15                 |          17,20                              37
+       32                                15,17               |          20                                 20
+       
+maximum of(15,37) is 37
+maximum of (32,20) is 32
+
+
+so the final answer will be : minimum of (37,32) =====> 32
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+APPROACH:
+The question involves the reduction of search space thats why we came up with binary search. Also the least complexity for this problem could be O(nlogn),
+so this also gives a glimpse that we can use binary search.
+
+How to proceed: 1.Create a search space and keep reducing the space according to the need.
+                2.Take the start to be the smallest element in the array
+                3.Take the end to be the sum of all elements in the array
+                4.Find mid and keep checking for the conditions
+                5.If allocation is not possible then return -1 
+                
+Other approach : DP will take exponential comlexity and Recursion would have taken a O(n^2) complexity. They may not have O(1) space complexity so we 
+have used the optimal approach that is binary  search.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+C++ CODE :
+#include <bits/stdc++.h>
+using namespace std;
+     bool allocation(int arr[],int n,int k,int barriers)
+        {
+            int allocatedstudent=1,pages=0;
+            for(int i=0;i<n;i++)
+            {
+                if(arr[i]>barriers )
+                     return false;
+                if((pages+arr[i])>barriers)
+                {
+                    allocatedstudent+=1;
+                    pages=arr[i];
+                }
+                else
+                pages+=arr[i];
+           
+           if(allocatedstudent>k)
+           return false;
+        }
+    
+        return true;
+    }
+    int findPages(int arr[], int n, int k) 
+    {
+        int start=*min_element(arr,arr+n);
+        int end= accumulate(arr, arr+n,0);
+        int res=-1;
+        // if the number of books are less than number of students .Condition2 is violated, so no combination possible
+        if(n<k)
+        return -1;
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
+            if(allocation(arr,n,k,mid))
+            {
+                res=mid;
+                end=mid-1;
+                
+            }
+            else
+            {
+                start=mid+1;
+            }
+           
+        }
+         return res;
+    }
+int main()
+{
+         int n ;
+         cin>>n;
+         int arr[n];
+         for(int i=0;i<n;i++)
+         cin>>arr[i];
+         int k;
+         cin>>k;
+         cout<< findPages(arr,n,k)<<endl;
+         return 0;
+ }
+         
+-------------------------------------------------------------------------------------------------------------------------------------------------------         
+Time Complexity:  O(nlogn)
+Space Complexity: O(1)
