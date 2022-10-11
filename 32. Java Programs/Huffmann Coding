@@ -1,0 +1,54 @@
+import java.util.*;
+class HuffmanNode {
+    int data;
+    char character;
+    HuffmanNode prev;
+    HuffmanNode next;
+}
+// For comparing the nodes
+class ImplementComparator implements Comparator<HuffmanNode> {
+    public int compare(HuffmanNode a, HuffmanNode b) {
+        return (a.data-b.data);
+    }
+}
+// Implementing the huffman algorithm
+public class Huffman {
+    public static void printCode(HuffmanNode root, String s) {
+        if (root.prev == null && root.next == null && Character.isLetter(root.character)) {
+            System.out.println(root.character + "   ->   " + s);
+            return;
+        }
+        printCode(root.prev, s + "0");
+        printCode(root.next, s + "1");
+    }
+    public static void main(String[] args) {
+        int n = 5;
+        char[] charArray = { 'V','I','J','A','Y' };
+        int[] charfreq = { 7,1,4,5,2 };
+        PriorityQueue<HuffmanNode> queue = new PriorityQueue<HuffmanNode>(n, new ImplementComparator());
+        for (int i = 0; i < n; i++) {
+            HuffmanNode Huff = new HuffmanNode();
+            Huff.character = charArray[i];
+            Huff.data = charfreq[i];
+            Huff.prev = null;
+            Huff.next = null;
+            queue.add(Huff);
+        }
+        HuffmanNode root = null;
+        while (queue.size() > 1){
+            HuffmanNode a = queue.peek();
+            queue.poll();
+            HuffmanNode b = queue.peek();
+            queue.poll();
+            HuffmanNode Huffnode = new HuffmanNode();
+            Huffnode.data = a.data + b.data;
+            Huffnode.character = '-';
+            Huffnode.prev = a;
+            Huffnode.next = b;
+            root = Huffnode;
+            queue.add(Huffnode);
+        }
+        System.out.println("Huffman code is: ");
+        printCode(root, "");
+    }
+}
