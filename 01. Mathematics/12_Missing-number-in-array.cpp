@@ -40,6 +40,7 @@ public:
         missing_num=sum_of_n-sum;//missing element 
         return missing_num;
     }
+    //another approach for doing the same question would be to sort the array and then traverse thorugh the array and check which number is not present
 };
 
 int main()
