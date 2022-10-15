@@ -52,6 +52,50 @@ public:
 	vector<int> printUnsorted(int arr[], int n)
 	{
 		// code here
+		int start,end; 
+	    vector<int> v;
+	    for(start=0;start<n-1;start++) //to find the first element from left which greater than its next element
+	    {
+	        if(arr[start]>arr[start+1])
+	        {
+	            break;
+	        }
+	    }
+	    for(end=n-1;end>0;end--)  //to find the first element from right which is less than its previous element
+	    {
+	        if(arr[end]<arr[end-1])
+	        {
+	            break;
+	        }
+	    }
+	    int min=arr[start];
+	    int max=arr[start];
+	    for(int i=start+1;i<=end;i++)// find the min and max value from the select subarray(start to end)
+	    {
+	        if(arr[i]>max)
+	        max=arr[i];
+	        if(arr[i]<min)
+	        min=arr[i];
+	    }
+	    for(int i=0;i<start;i++)// if the first next greater element than min in range [0 to start-1] change the start
+	    {
+	        if(arr[i]>min)
+	        {
+	            start=i;
+	            break;
+	        }
+	    }
+	    for(int i=n-1;i>=end+1;i--)// if there is any element less than max in range [end+1 to n-1] chage the end
+	    {
+	        if(arr[i]<max)
+	        {
+	            end=i;
+	            break;
+	        }
+	    }
+	    v.push_back(start);
+	    v.push_back(end);
+	    return v;
 	}
 };
 
