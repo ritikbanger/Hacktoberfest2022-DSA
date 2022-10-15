@@ -1,0 +1,75 @@
+// Linked list implementation in C
+
+#include <stdio.h>      //Header file for standard input and output
+#include <stdlib.h>     //Header file for standard library for process control, memory allocation etc.
+
+// Creating a node for our Linked List
+struct node {
+  int value;        //This variable stores the value part of any node
+  struct node *next;    //This pointer variable stores the address of the next node
+};
+
+// This block of code will print the value of the nodes
+void printLinkedlist(struct node *p) {
+  while (p != NULL) {       //This loop will run until the pointer variable is null (The last node of Linked List)
+    printf("%d ", p->value);    //It prints the value part of the current node
+    p = p->next;        //It points the next node of the current node
+  }
+}
+
+int main() {
+  // Initialize nodes for the operation
+  struct node *start;       //Going through the start node
+  struct node *one = NULL;  //Initializing NULL value to all the values
+  struct node *two = NULL;
+  struct node *three = NULL;
+  struct node *four = NULL;
+  struct node *five = NULL;
+  struct node *six = NULL;
+  struct node *seven = NULL;
+  struct node *eight = NULL;
+  struct node *nine = NULL;
+  struct node *ten = NULL;
+  
+
+  // Allocate memory for all the nodes
+  one = malloc(sizeof(struct node));
+  two = malloc(sizeof(struct node));
+  three = malloc(sizeof(struct node));
+  four = malloc(sizeof(struct node));
+  five = malloc(sizeof(struct node));
+  six = malloc(sizeof(struct node));
+  seven = malloc(sizeof(struct node));
+  eight = malloc(sizeof(struct node));
+  nine = malloc(sizeof(struct node));
+  ten = malloc(sizeof(struct node));
+
+  // Assign values for all the nodes
+  one->value = 1;
+  two->value = 2;
+  three->value = 3;
+  four->value = 4;
+  five->value = 5;
+  six->value = 6;
+  seven->value = 7;
+  eight->value = 8;
+  nine->value = 9;
+  ten->value = 10;
+  
+
+  // Connect nodes from first nodes to last nodes
+  one->next = two;
+  two->next = three;
+  three->next = four;
+  four->next = five;
+  five->next = six;
+  six->next = seven;
+  seven->next = eight;
+  eight->next = nine;
+  nine->next = ten;
+  ten->next = NULL;
+
+  // printing node-values of all the nodes
+  start = one;
+  printLinkedlist(start);
+}
