@@ -1,88 +1,68 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node {
+class Node {
+
+	public:
 	int key;
 	struct Node* next;
+
+	Node(int data){
+
+		key = data;
+		next = NULL;
+	}
 };
 
-Node* newNode(int key)
-{
-	Node* temp = new Node;
-	temp->key = key;
-	temp->next = NULL;
-	return temp;
-}
-
+// Function to Print Entire LinkedList
 void printList(Node* head)
 {
 	while (head != NULL) {
-		cout << head->key << " ";
-		head = head->next;
+
+		cout << head -> key << " ";
+		head = head -> next;
 	}
 	cout << endl;
 }
 
-int distance(Node* first, Node* last)
-{
-	int counter = 0;
-
-	Node* curr;
-	curr = first;
-
-	while (curr != last) {
-		counter += 1;
-		curr = curr->next;
-	}
-
-	return counter + 1;
-}
-
+// Optimal approach to detect a Cycle in a LinkedList
 bool detectLoop(Node* head)
 {
 
-	Node* temp = new Node;
+	Node *fast_ptr = head;
+	Node *slow_ptr = head;
 
-	Node *first, *last;
+	fast_ptr = fast_ptr -> next -> next;
+ 	slow_ptr = slow_ptr -> next;
 
-	first = head;
-	last = head;
+	while(fast_ptr -> next != NULL && fast_ptr != NULL){
 
-	int current_length = 0;
+		if(fast_ptr == slow_ptr) break;
 
-	int prev_length = -1;
-
-	while (current_length > prev_length && last != NULL) {
-	
-		prev_length = current_length;
-	
-		current_length = distance(first, last);
-		
-		last = last->next;
+		fast_ptr = fast_ptr -> next -> next;
+		slow_ptr = slow_ptr -> next;
 	}
-	
-	if (last == NULL) {
-		return false;
-	}
-	else {
-		return true;
-	}
+
+	return fast_ptr==slow_ptr;
 }
+
 int main()
 {
-	Node* head = newNode(1);
-	head->next = newNode(2);
-	head->next->next = newNode(3);
-	head->next->next->next = newNode(4);
-	head->next->next->next->next = newNode(5);
-
+	// Creating a Linked List 
+	Node* head = new Node(1);
+	head->next = new Node(2);
+	head->next->next = new Node(3);
+	head->next->next->next = new Node(4);
+	head->next->next->next->next = new Node(5);
+	// Creating a Loop in our LinkedList
 	head->next->next->next->next->next = head->next->next;
 
+	// Calling Function to detect presence of Loop
 	bool found = detectLoop(head);
-	if (found)
+
+	if (found) 
 		cout << "Loop Found";
-	else
+	else 
 		cout << "No Loop Found";
 
 	return 0;
