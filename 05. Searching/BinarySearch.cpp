@@ -1,60 +1,26 @@
-/*Created by Lakshay Goel
-  Github Profile link: https://github.com/MrLakshay
-  
-  
-  Problem statement : A sorted array is input by the user and then a key. 
-  Binary search is performed on the array if found then the array index will be output
-  else -1 will be the output.
-  Example : 
-  5 //Array size
-  1 2 3 4 5 //Array element 
-  3 //Key to be searched
-  2 // Element found at 2 index of array
-  
-*/
-#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdio>
+#include<cmath>
 using namespace std;
-int srch(int arr[],int x,int l,int r){
-    if(r>=l){
-        int mid = l + (r - l) / 2;
-        
-        if(arr[mid]==x){
-            if(mid==l ){
-                return mid;
-            }
-            top:
-            if(arr[mid]==arr[mid-1])
-            {
-                mid--;
-                goto top;
-            }
-            return mid;
-        }
-        else if(arr[mid]>x){
-            return srch(arr,x,l,mid-1);
-        }
-        else{
-            return srch(arr,x,mid+1,r);
-        }
-    }
-    return -1;
+int rec_binary_search(int arr[], int left, int right, int x) {
+  int result;
+  if (right >= left) {
+    int mid = left + (right - left)/2;
+    if (arr[mid] == x)  return mid;
+    if (arr[mid] > x) return rec_binary_search(arr, left, mid-1, x);
+    result = rec_binary_search(arr, mid+1, right, x);
+    return result;
+  }
+  return -1;       // when element is not present in array.
 }
-int main(){
-    int n;
-    cin>>n;
-    int arr[n];
-    for(int i=0;i<n;i++)
-    cin>>arr[i];
-    int t;
-    cin>>t;
-    int search[t];
-    for (int i = 0; i < t; i++)
-    {
-        cin>>search[i];
-    }
-    for (int i = 0; i < t; i++)
-    {
-        cout<<srch(arr,search[i],0,n)<<" ";
-    }
-    return 0;
+
+int main() {
+  int loc,x,array[]={10,11,12,13,14,25,26,37,48,59};
+  x=11;        // element to be searched in the array
+  loc=rec_binary_search(array,0,10,x);
+  if(loc != -1)
+    cout<<"Element found at location : "<<loc;
+  else
+    cout<<"Element not present in the array.";
+  return 0;
 }
