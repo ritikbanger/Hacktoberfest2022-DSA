@@ -31,7 +31,6 @@ void back_subsitution()
  
 void main() 
 {
-    printf("Name: Ishika Gupta\nUniversity Roll No.: 2016786\nSemester: 5\nSection/Class Roll No. :B-48\n");
     printf("Enter the order of the matrix: ");
     scanf("%d", &n);
     printf("Enter the augmented matrix: \n");
