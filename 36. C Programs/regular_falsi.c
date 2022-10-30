@@ -7,7 +7,6 @@ float function(float x)
 }
 int main()
 {
-    printf("Name: Ishika Gupta\nUniversity Roll No.: 2016786\nSemester: 5\nSection/Class Roll No. :B-48\n");
     float x0,x1,e,x2,f0,f1,f2;
     int step=1;
     label: 
