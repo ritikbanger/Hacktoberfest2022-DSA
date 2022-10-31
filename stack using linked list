@@ -1,0 +1,120 @@
+//Stack Using Linked List c++
+//wikkihut.com
+
+#include<iostream>
+using namespace std;
+
+//create a structure ( node )
+
+struct stack
+{
+  int data;
+  stack *link;
+}*top;
+
+//push function to add items to stack
+
+void push()
+{
+  int n;
+  stack *node;
+  node=new stack;
+
+//if program is not able to create node
+
+if(node==NULL)
+{
+  cout<<"no space avail: /n";
+  return;
+
+}
+  cout<<"enter data\n";
+  cin>>n;
+  node->data=n;
+  node->link=NULL;
+  if(top==NULL)
+  top=node;
+else
+{
+  node->link=top;
+  top=node;
+}
+}
+
+
+
+int pop()
+{
+  stack *temp;
+  int value;
+  if(top==NULL)
+{
+cout<<"STack Underflow";
+  return 0;
+}
+else
+{
+  temp=top;
+  value=temp->data;
+  top=top->link;
+  delete temp;
+
+return value;
+}
+}
+
+void display()
+{
+  stack *temp;
+  temp=top;
+  if(temp==NULL)
+  cout<<"stack underflow";
+else
+{
+  cout<<"\nElements in stack are: \n";
+  while(temp!=NULL)
+{
+
+  cout<<"\t\t"<<temp->data<<endl;
+  temp=temp->link;
+}
+}
+}
+
+int main()
+{
+//menu based program of stack
+
+ top=NULL;
+ int ch, value;
+while(1)
+{   cout<<"\n\t --------- Choose ----  \n";
+   cout<<"\n\tPress 1 for Push \n";
+   cout<<"\tPress 2 for Pop: \n";
+   cout<<"\tPress 3 for Display: \n";
+  cout<<"\tPress 4 for Exit: \n";
+  cout<<"\n enter choice: \n";
+  cin>>ch;
+switch(ch)
+{
+  case 1:
+  push();
+  break;
+  case 2:
+value=pop();
+if(value!=0)
+  cout<<"\nElement Popped is "<<value;
+  break;
+ case 3:
+  display();
+  break;
+ case 4:
+  return 0;
+default:
+cout<<"Invalid choice:\n";
+}
+}
+return 0;
+
+//wikkihut.com
+}
